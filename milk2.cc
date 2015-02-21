@@ -61,8 +61,8 @@ int main() {
                     }
                 }
             }
-            else if(times[i].first <= idle[j].second && times[i].first >= idle[j].first) idle[j].second = times[i].first;
-            else if(times[i].second <= idle[j].second && times[i].second >= idle[j].first) idle[j].first = times[i].second;
+            else if(times[i].first <= idle[j].second && times[i].first > idle[j].first) idle[j].second = times[i].first;
+            else if(times[i].second < idle[j].second && times[i].second >= idle[j].first) idle[j].first = times[i].second;
         }
     }
 
