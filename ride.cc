@@ -27,10 +27,6 @@ int main() {
     c = get_code(a);
     d = get_code(b);
 
-    if(c==d) {
-        fout << "GO" << endl;
-        exit (0);
-    }
+    if(c==d) fout << "GO" << endl;
     fout << "STAY" << endl;
-    exit (0);
 }
