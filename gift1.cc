@@ -49,5 +49,4 @@ int main() {
         fout << money_map[peopleNames[i]].second << endl;
     }
 
-    exit(0);
 }
