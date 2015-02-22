@@ -49,7 +49,7 @@ int main() {
                 idle[j+1].second = idle[j].second;
                 count++;
             }
-            else if(times[i].first == idle[j].first && times[i].second == idle[j].second) {
+            else if(times[i].first <= idle[j].first && times[i].second >= idle[j].second) {
                 for(int k = j; k < count; k++) {
                     if((k + 1) < count) {
                         idle[k].first = idle[k+1].first;
