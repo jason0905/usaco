@@ -7,6 +7,8 @@ TASK: milk2
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <map>
 
 using namespace std;
 
@@ -15,20 +17,20 @@ int main() {
     ifstream fin ("milk2.in");
     ofstream fout ("milk2.out");
 
-    int N, milk2 = 0, idle2 = 0, count = 1;
-    pair<int, int> times[500], milk[500], idle[499];
-
-    idle[0].first = 1000000;
-    idle[0].second = 0;
+    int N, milk2 = 0, idle2 = 0, count = 0, max, min;
+    pair<int, int> times[5000], milk[5000];
 
     fin >> N;
+
+    min = 1000000;
+    max = 0;
 
     for(int i = 0; i < N; i++) {
         fin >> times[i].first >> times[i].second;
         milk[i].second = times[i].second;
         milk[i].first = times[i].first;
-        if(times[i].first < idle[0].first) idle[0].first = times[i].first;
-        if(times[i].second > idle[0].second) idle[0].second = times[i].second;
+        if(times[i].first < min) min = times[i].first;
+        if(times[i].second > max) max = times[i].second;
     }
 
     for(int i = 0; i < N; i++) {
@@ -41,33 +43,18 @@ int main() {
         if((milk[i].second - milk[i].first) > milk2) milk2 = milk[i].second - milk[i].first;
     }
 
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < count; j++) {
-            if(times[i].first > idle[j].first && times[i].second < idle[j].first) {
-                idle[j].second = times[i].first;
-                idle[j+1].first = times[i].second;
-                idle[j+1].second = idle[j].second;
-                count++;
+    for(float i = min + 0.5; i <= max; i++) {
+        bool cont = true;
+        bool add = true;
+        for(int j = 0; j < N && (cont == true); j++) {
+            if(times[j].first <= i && times[j].second >= i) {
+                if(count > idle2) idle2 = count;
+                count = 0;
+                cont = false;
+                add = false;
             }
-            else if(times[i].first <= idle[j].first && times[i].second >= idle[j].second) {
-                for(int k = j; k < count; k++) {
-                    if((k + 1) < count) {
-                        idle[k].first = idle[k+1].first;
-                        idle[k].second = idle[k+1].second;
-                    }
-                    else {
-                        idle[k].first = 0;
-                        idle[k].second = 0;
-                    }
-                }
-            }
-            else if(times[i].first <= idle[j].second && times[i].first > idle[j].first) idle[j].second = times[i].first;
-            else if(times[i].second < idle[j].second && times[i].second >= idle[j].first) idle[j].first = times[i].second;
         }
-    }
-
-    for(int i = 0; i < count; i++) {
-        if((idle[i].second - idle[i].first) > idle2) idle2 = idle[i].second - idle[i].first;
+        if(add == true) count++;
     }
 
     fout << milk2 << " " << idle2 << endl;
