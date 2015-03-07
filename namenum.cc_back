@@ -1,0 +1,126 @@
+/*
+ID: jason091
+LANG: C++
+TASK: namenum
+ */
+
+
+#include <map>
+#include <vector>
+#include <set>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <algorithm>
+#include <stdlib.h>
+
+using namespace std;
+
+inline int charToInt(char x) {
+    return x - 48;
+}
+
+inline char intToChar(int x) {
+    return x + 48;
+}
+
+inline string baseThree(int x, int N) {
+    string y;
+    for(int i = N - 1; i >= 0; i--) {
+        y += intToChar(x % 3);
+        x /= 3;
+    }
+    return y;
+}
+
+inline bool check(const string & name, const set<string> & legalNames)
+{ return legalNames.find(name)!=legalNames.end(); }
+
+void getPossibleNames(const string & N, vector<string> & combos, const set<string> & legalNames) {
+    char number[3][12];
+    int m = 1;
+    string str, str1 = N;
+    
+    for(int i = 0; i < N.size(); ++i) {
+        if(N[i] == '2') {
+            number[0][i] = 'A';
+            number[1][i] = 'B';
+            number[2][i] = 'C';
+        }
+        else if(N[i] == '3') {
+            number[0][i] = 'D';
+            number[1][i] = 'E';
+            number[2][i] = 'F';
+        }
+        else if(N[i] == '4') {
+            number[0][i] = 'G';
+            number[1][i] = 'H';
+            number[2][i] = 'I';
+        }
+        else if(N[i] == '5') {
+            number[0][i] = 'J';
+            number[1][i] = 'K';
+            number[2][i] = 'L';
+        }
+        else if(N[i] == '6') {
+            number[0][i] = 'M';
+            number[1][i] = 'N';
+            number[2][i] = 'O';
+        }
+        else if(N[i] == '7') {
+            number[0][i] = 'P';
+            number[1][i] = 'R';
+            number[2][i] = 'S';
+        }
+        else if(N[i] == '8') {
+            number[0][i] = 'T';
+            number[1][i] = 'U';
+            number[2][i] = 'V';
+        }
+        else if(N[i] == '9') {
+            number[0][i] = 'W';
+            number[1][i] = 'X';
+            number[2][i] = 'Y';
+        }
+        m *= 3;
+    }
+
+    for(int i = 0; i < m; ++i) {
+        str = baseThree(i, N.size());
+
+        for(int j = 0; j < N.size(); ++j) {
+            str1[j] = number[charToInt(str[j])][j];
+        }
+
+        if(check(str1, legalNames))
+            combos.push_back(str1);
+    }
+}
+
+
+int main() {
+
+    ifstream fin ("namenum.in");
+    ofstream fout ("namenum.out");
+    ifstream txt ("dict.txt");
+
+    string N, temp;
+    vector<string> combos;
+    set<string> legalNames;
+
+    fin >> N;
+
+    while(txt) {
+        txt >> temp;
+        legalNames.insert(temp);
+    }
+
+    getPossibleNames(N, combos, legalNames);
+    sort(combos.begin(), combos.end());
+
+    if (combos.empty())
+        fout<<"NONE"<<endl;
+    else
+        for(int i = 0; i < combos.size(); i++) 
+            fout << combos[i] << endl;
+}
