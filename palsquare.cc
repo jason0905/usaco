@@ -24,11 +24,7 @@ string changeBase(int n, int b) {
     string x;
 
     for(int i = 0; n > 0; i++) {
-        if((n % b) < 10)
-            x += (n % b) + 48;
-        else
-            x += ((n % b) + 55);
-
+        x += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"[n % b];
         n /= b;
     }
 

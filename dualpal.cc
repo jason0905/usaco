@@ -14,11 +14,7 @@ string changeBase(int n, int b) {
     string x;
 
     for(int i = 0; n > 0; i++) {
-        if((n % b) < 10)
-            x += (n % b) + 48;
-        else
-            x += ((n % b) + 55);
-
+        x += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"[n % b];
         n /= b;
     }
 
@@ -29,7 +25,7 @@ bool hasTen(int x) {
     string y;
     for(int i = 2, j = 0; i < 11; i++) {
         y = changeBase(x, i);
-        for(int k = 0, l = y.size() - 1; k <= l; k++, l--) {
+        for(int k = 0, l = y.size() - 1; ; k++, l--) {
             if(y[k] != y[l]) break;
             else if(k + 1 >= l) {
                 j++;

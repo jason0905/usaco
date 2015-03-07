@@ -7,7 +7,7 @@ all: $(DIR) $(OUT)
 exe: $(EXE)
 
 $(DIR)/%.out:%.in $(DIR)/%.exe
-	$(@:.out=.exe)
+	time $(@:.out=.exe)
 	@mv  $(<:.in=.out) $(DIR)
 	@cat $< && echo "===>"
 	@cat $@ && echo ""
