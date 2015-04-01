@@ -61,7 +61,7 @@ int main() {
     ifstream in ("matrixsolve.in");
     ofstream out ("matrixsolve.out");
 
-    int N;
+    int N, count = 0;
     vector<vector<double> > matrix;
     vector<double> solutions;
 
@@ -95,7 +95,11 @@ int main() {
     }
 
     //Loop through each row
-    for(int i = 0; i < N; i++) {
+    for(int i = 0; i < N; count++, i++) {
+	if(count == 2 * N) {
+	    out << "No solutions" << endl;
+	    exit(0);
+	}
         //Make sure ith one in ith row isn't zero
         if(matrix[i][i] == 0) {
             if(i < N - 1)
@@ -123,6 +127,14 @@ int main() {
     //Get solutions
     for(int i = 0; i < N; i++)
         solutions[i] = matrix[i][N];
+
+    //Final Matrix
+    out << "Matrix in rref" << endl;
+    for(int i = 0; i < N; i++) {
+	for(int j = 0; j <= N; j++)
+	    out << matrix[i][j] << " ";
+	out << endl;
+    }
 
     //Output solutions
     out << "Solution:" << endl;

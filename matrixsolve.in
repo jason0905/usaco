@@ -1,3 +1,10 @@
-2
-1 2 3
-5 6 11
+3
+1 -1 1 -4
+2 -3 4 -15
+5 1 -2 12
+
+Input everything before this in this format:
+Number of equations, N
+A0, A1, A2, ..., AN
+B0, B1, B2, ..., BN
+...
