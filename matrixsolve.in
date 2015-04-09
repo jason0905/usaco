@@ -1,8 +1,7 @@
-3
-1 -1 1 -4
-2 -3 4 -15
-5 1 -2 12
-
+2
+1 1 1 
+-1 -1 1 
+ 
 Input everything before this in this format:
 Number of equations, N
 A0, A1, A2, ..., AN

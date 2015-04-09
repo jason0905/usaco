@@ -6,15 +6,9 @@ using namespace std;
 
 double determinant(vector<vector<int> > matrix) {
     int ans = 0;
-/*    for(int i = 0; i < matrix.size(); i++) {
-        for(int j = 0; j < matrix.size(); j++)
-            cerr << matrix[i][j] << " ";
-        cerr << endl;
-    }*/
     if(matrix[0].size() == 2) {
         ans += matrix[0][0] * matrix[1][1];
         ans -= matrix[1][0] * matrix[0][1];
-        //cerr << ans << endl;
         return ans;
     }
 
@@ -46,8 +40,6 @@ double determinant(vector<vector<int> > matrix) {
         ans += (cofactor * matrix[0][i] * determinant(matrix2));
     }
 
-    //cerr << ans << endl;
-
     return ans;
 }
 
@@ -62,8 +54,6 @@ int main() {
 
     in >> N;
 
-    //cerr << N << endl;
-
     for(int i = 0; i < N; i++) {
         vector<int> temp3;
         vector<int> temp2;
@@ -77,17 +67,14 @@ int main() {
         matrix.push_back(temp2);
         matrix2.push_back(temp3);
     }
-    //cerr << N << endl;
 
     determinants.push_back(determinant(matrix2));
-    //cerr << determinants[0] << endl;
 
     for(int i = 0; i < N; i++) {
         for(int j = 0; j < N; j++)
             matrix2[j][i] = matrix[j][N];
         determinants.push_back(determinant(matrix2));
-        //cerr << determinants[i + 1] << endl;
-        if(determinants[i + 1] == 0) {
+        if(determinants[0] == 0) {
             out << "Infinite solutions or no solutions, Cramer's rule is unapplicable." << endl;
             return 0;
         }
