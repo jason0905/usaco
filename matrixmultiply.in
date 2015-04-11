@@ -1,0 +1,15 @@
+1 2 3
+1 2
+3 4 5
+6 7 8
+
+Insert all your numbers before this in the following format:
+a b c
+A00 A01 ... A0a
+A10 A11 ... A1a
+... ... ... ...
+Ab0 Ab1 ... Aba
+B00 B01 ... B0b
+B10 B11 ... B1b
+... ... ... ...
+Bc0 Bc1 ... Bcb
